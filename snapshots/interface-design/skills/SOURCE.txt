@@ -1,0 +1,6 @@
+repo: https://github.com/Dammyjay93/interface-design.git
+pin: {"type": "commit", "tag": null, "commit": "2f9be32"}
+vendorSkillPath: .claude/skills/interface-design
+snapshottedAt: 2026-10-12T08:26:26+08:00
+说明: 本目录是从完整上游精简单出的快照，只保留重抽 payload 所需内容；
+      .git / docs / evals / tests 与图片素材已剔除。原仓 URL 见 repo 行。

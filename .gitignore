@@ -1,0 +1,22 @@
+# 完整上游浅克隆（不入 git，仅升级上游时用；可随时丢弃重建）
+vendor/
+
+# 挂载脚本写出的运行时清单
+mounts.json
+
+# 脚本跑出的报告产物
+sync-report.txt
+video-info.txt
+
+# 运行/审查产物
+*.log
+.impeccable/
+design-system/
+SPEC.md
+ARCHITECTURE.md
+__pycache__/
+
+# 本地视频抽帧产物与探测记录（不随仓库分发）
+_video/
+video-frames/
+

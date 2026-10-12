@@ -1,0 +1,6 @@
+repo: https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git
+pin: {"type": "tag", "tag": "v2.15.0", "commit": "a38d04c"}
+vendorSkillPath: .claude/skills/ui-ux-pro-max
+snapshottedAt: 2026-10-12T08:26:26+08:00
+说明: 本目录是从完整上游精简单出的快照，只保留重抽 payload 所需内容；
+      .git / docs / evals / tests 与图片素材已剔除。原仓 URL 见 repo 行。

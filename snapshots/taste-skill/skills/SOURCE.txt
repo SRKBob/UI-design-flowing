@@ -1,0 +1,6 @@
+repo: https://github.com/senlindesign/taste-skill.git
+pin: {"type": "commit", "tag": null, "commit": "6dce223"}
+vendorSkillPath: .
+snapshottedAt: 2026-10-12T08:26:26+08:00
+说明: 本目录是从完整上游精简单出的快照，只保留重抽 payload 所需内容；
+      .git / docs / evals / tests 与图片素材已剔除。原仓 URL 见 repo 行。

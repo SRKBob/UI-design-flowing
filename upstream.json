@@ -1,0 +1,96 @@
+{
+  "_comment": "本仓库的三层结构：snapshots/ = 精简上游源码（入 git，供离线重抽）；payload/skills/ = 抽取出的技能目录（入 git，工具真正加载的）；vendor/ = 完整上游浅克隆（不入 git，仅升级用）。三层路径与抽取关系由本文件描述，scripts/sync-upstream.py 读它干活。",
+  "generatedAt": "2026-10-12T08:26:26+08:00",
+  "components": [
+    {
+      "skill": "ui-ux-pro-max",
+      "role": "② 定方向：按产品类型查表出完整设计系统（配色/字体/版式/反模式/交付检查项）",
+      "repo": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill.git",
+      "license": "MIT",
+      "pin": {
+        "type": "tag",
+        "tag": "v2.15.0",
+        "commit": "a38d04c"
+      },
+      "vendorPath": "vendor/ui-ux-pro-max-skill",
+      "vendorSkillPath": ".claude/skills/ui-ux-pro-max",
+      "snapshotSkill": "snapshots/ui-ux-pro-max-skill/skills/ui-ux-pro-max",
+      "payloadPath": "payload/skills/ui-ux-pro-max",
+      "notes": [
+        "上游把本技能放在 .claude/skills/ui-ux-pro-max；cli/assets/skills 里**没有**它（那里只有 brand/design/slides 等附属技能）。",
+        "payload 是本仓体积最大的一项（70+ 文件），主要来自 data/ 的数据表。",
+        "scripts/search.py 是纯 Python 标准库，实测可直接跑；Windows 上要用 python，别用 python3（后者可能是微软商店的桩）。"
+      ]
+    },
+    {
+      "skill": "taste",
+      "role": "② 可选：给一个 URL，反推该站的设计 DNA（tokens + 为什么这么设计）",
+      "repo": "https://github.com/senlindesign/taste-skill.git",
+      "license": "MIT（README 徽章声明；上游仓库未提交 LICENSE 文件）",
+      "pin": {
+        "type": "commit",
+        "tag": null,
+        "commit": "6dce223"
+      },
+      "vendorPath": "vendor/taste-skill",
+      "vendorSkillPath": ".",
+      "snapshotSkill": "snapshots/taste-skill/skills/taste",
+      "payloadPath": "payload/skills/taste",
+      "notes": [
+        "仓库根就是技能目录（SKILL.md 在根上），没有外层包装。",
+        "上游无 release tag，只能按 commit 钉住。",
+        "原设计依赖 Playwright MCP + Chromium；本仓按 references/capabilities.md 的降级表处理，不强绑 Playwright。",
+        "快照时剔除了 docs/ 里约 10MB 的展示用图片（与技能运行无关）。"
+      ]
+    },
+    {
+      "skill": "interface-design",
+      "role": "② 可选：既有产品视觉体系的方向确认与跨会话一致性",
+      "repo": "https://github.com/Dammyjay93/interface-design.git",
+      "license": "MIT",
+      "pin": {
+        "type": "commit",
+        "tag": null,
+        "commit": "2f9be32"
+      },
+      "vendorPath": "vendor/interface-design",
+      "vendorSkillPath": ".claude/skills/interface-design",
+      "snapshotSkill": "snapshots/interface-design/skills/interface-design",
+      "payloadPath": "payload/skills/interface-design",
+      "notes": [
+        "上游无 release tag，按 commit 钉住。",
+        "技能只含 SKILL.md 与 agents/openai.yaml（给 Codex 的子 agent 声明）。",
+        "它自己声明：适用于 dashboard / admin / SaaS / 工具类产品界面，不管营销页与品牌页。"
+      ]
+    },
+    {
+      "skill": "impeccable",
+      "role": "③ 的上限（工艺底线）+ ④ 的交付检查与去 AI 味",
+      "repo": "https://github.com/pbakaus/impeccable.git",
+      "license": "Apache-2.0",
+      "pin": {
+        "type": "commit",
+        "tag": null,
+        "commit": "c63b8dd",
+        "engine": "见 payload/skills/impeccable/scripts/VERSION"
+      },
+      "vendorPath": "vendor/impeccable",
+      "vendorSkillPath": ".agents/skills/impeccable",
+      "snapshotSkill": "snapshots/impeccable/skills/impeccable",
+      "payloadPath": "payload/skills/impeccable",
+      "notes": [
+        "上游是多工具发行仓：同一技能在每个工具的目录下各有一份预构建产物（.claude/ .cursor/ .dsh/ .gemini/ .github/ .agents/ …）。Codex 用 .agents/skills/，本仓取这一份。",
+        "完整仓库 74MB（含 Rust 引擎与浏览器扩展源码），技能本体只 2.14MB；vendor 是浅克隆。",
+        "技能自带启动器 scripts/impeccable + impeccable.cmd，跑随包引擎二进制，缺了首次下载，不需要 Node。",
+        "本机另有一份旧装 ~/.codex/skills/impeccable（引擎 0.1.12），与本仓 0.1.14 同名；挂载脚本刻意不接管同名目录。",
+        "它是从 Anthropic 的 frontend-design 起步的独立项目（作者 Paul Bakaus / pbakaus）。"
+      ]
+    }
+  ],
+  "decisionLog": [
+    "2026-10-12 用户拍板：四个设计技能全都要；编排走四段式；先接 Codex，其他工具暂不需要。",
+    "2026-10-12 用户拍板：上游源码要入库（可离线复现），并新建仓库推送远程；视频截图只留本地、不上传。",
+    "2026-10-12 据此把 vendor 改成 snapshots：只保留重抽 payload 所需的最小集（剔除 .git / docs / evals / tests 与图片素材），25.6MB → 5.9MB 后入库。",
+    "2026-10-12 用户拍板：编排层按视频模型校正——需求阶段改为'只综合不反问'并产出 SPEC 六节、按页面类型路由规范、新增'代码理解/关系图'作为第四段，并把交付检查放到它之后。"
+  ]
+}
